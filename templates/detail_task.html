@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Детальный просмотр{% endblock %}
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ data.summary }}</h5>
+            <p class="card-text">{{ data.description }}</p>
+            {% for task in type_tasks %}
+                {% for status in statuses %}
+                    {% if status.0 == data.status.title %}
+                        {% if task.0 == data.task.title %}
+                            <p class="card-text"><strong>{{ task.1 }}:</strong> {{ status.1 }}</p>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            <p class="card-text">Дата добавления: {{ data.create_date|date:'Y-m-d H:i' }}</p>
+            <p class="card-text">Дата обновления: {{ data.update_date|date:'Y-m-d H:i' }}</p>
+
+            <a href="{% url 'task_edit' data.id %}" class="btn btn-primary">Изменить</a>
+            <a href="{% url 'delete_task' data.id %}" class="btn btn-danger">Удалить</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,11 +1,11 @@
 from django.db import models
 
-TASKS = [('Task', 'Задача'), ('Bug', 'Ошибка'), ('Enhancement', 'Улучшение')]
+TYPE_TASKS = [('Task', 'Задача'), ('Bug', 'Ошибка'), ('Enhancement', 'Улучшение')]
 STATUS = [('New', 'Новый'), ('In Progress', 'В процессе'), ('Done', 'Выполнено')]
 
 
 class TasksModel(models.Model):
-    title = models.CharField(max_length=30, null=False, blank=False, verbose_name='Наименование', choices=TASKS)
+    title = models.CharField(max_length=30, null=False, blank=False, verbose_name='Наименование', choices=TYPE_TASKS)
 
     class Meta:
         db_table = 'TasksModel'
