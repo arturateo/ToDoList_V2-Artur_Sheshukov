@@ -5,7 +5,7 @@
 * Этап №1
   * Создайте папку для проекта 
   * Клонируйте проект в папку с помощью командной строки
-    *       git clone git@github.com:arturateo/shop-Artur_Sheshukov.git
+    *       git clone git@github.com:arturateo/ToDoList_V2-Artur_Sheshukov.git
 * Этап №2
     * Установите виртуальное окружение 
       *     python -m venv venv 
