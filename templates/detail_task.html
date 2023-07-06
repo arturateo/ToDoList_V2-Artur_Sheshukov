@@ -5,15 +5,11 @@
         <div class="card-body">
             <h5 class="card-title">{{ data.summary }}</h5>
             <p class="card-text">{{ data.description }}</p>
-            {% for task in type_tasks %}
-                {% for status in statuses %}
-                    {% if status.0 == data.status.title %}
-                        {% if task.0 == data.task.title %}
-                            <p class="card-text"><strong>{{ task.1 }}:</strong> {{ status.1 }}</p>
+            <p class="card-text"><strong>
+                    {% for task in data.tasks.all %}
+                        {{ task.title }}{% if not forloop.last %},
                         {% endif %}
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
+                    {% endfor %}:</strong> {{ data.status }}</p>
             <p class="card-text">Дата добавления: {{ data.create_date|date:'Y-m-d H:i' }}</p>
             <p class="card-text">Дата обновления: {{ data.update_date|date:'Y-m-d H:i' }}</p>
 

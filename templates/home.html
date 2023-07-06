@@ -5,17 +5,11 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{ list.summary }}</h5>
-
-                {% for task in type_tasks %}
-                    {% for status in statuses %}
-                        {% if status.0 == list.status.title %}
-                            {% if task.0 == list.task.title %}
-                                <p class="card-text"><strong>{{ task.1 }}:</strong> {{ status.1 }}</p>
-                            {% endif %}
+                <p class="card-text"><strong>
+                    {% for task in list.tasks.all %}
+                        {{ task.title }}{% if not forloop.last %},
                         {% endif %}
-                    {% endfor %}
-                {% endfor %}
-
+                    {% endfor %}:</strong> {{ list.status }}</p>
                 <a href="{% url 'task_detail' list.id %}" class="btn btn-primary">Детальный просмотр</a>
             </div>
         </div>
