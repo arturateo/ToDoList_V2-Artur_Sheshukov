@@ -29,9 +29,11 @@ class ToDoListAdminModels(admin.ModelAdmin):
     list_filter = ['summary', 'description', 'status', 'tasks']
     search_fields = ['summary', 'description', 'status', 'tasks']
     readonly_fields = ['create_date', 'update_date']
+    filter_horizontal = ('tasks',)
     fields = ['summary', 'description', 'status', 'tasks', 'create_date', 'update_date']
 
     def tasks(self):
         return self.tasks.title
+
 
 admin.site.register(ToDoListModels, ToDoListAdminModels)
