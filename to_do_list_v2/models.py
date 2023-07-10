@@ -39,3 +39,6 @@ class ToDoListModels(models.Model):
         db_table = 'ToDoList'
         verbose_name = 'Список задач'
         verbose_name_plural = 'Список задач'
+
+    def __str__(self):
+        return f'{self.summary} '

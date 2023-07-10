@@ -24,16 +24,16 @@ admin.site.register(StatusModel, StatusAdminModels)
 
 
 class ToDoListAdminModels(admin.ModelAdmin):
-    list_display = ['id', 'summary', 'description', 'status', 'tasks', 'create_date', 'update_date']
-    list_display_links = ['id', 'summary', 'description', 'status', 'tasks']
-    list_filter = ['summary', 'description', 'status', 'tasks']
-    search_fields = ['summary', 'description', 'status', 'tasks']
+    list_display = ['id', 'summary', 'description', 'create_date', 'update_date']
+    list_display_links = ['id', 'summary', 'description']
+    list_filter = ['status', 'tasks']
+    search_fields = ['summary', 'description']
     readonly_fields = ['create_date', 'update_date']
     filter_horizontal = ('tasks',)
     fields = ['summary', 'description', 'status', 'tasks', 'create_date', 'update_date']
 
-    def tasks(self):
-        return self.tasks.title
+    # def tasks(self):
+    #     return self.tasks.title
 
 
 admin.site.register(ToDoListModels, ToDoListAdminModels)

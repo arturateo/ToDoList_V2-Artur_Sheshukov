@@ -1,0 +1,19 @@
+from to_do_list_v2.models import ToDoListModels, TasksModel, StatusModel
+from django.utils import timezone
+from datetime import timedelta
+from django.db.models import Q, Count, F
+
+
+tasks = ToDoListModels.objects.all()
+
+tasks.filter(status__title="Выполнено").filter(update_date__gte=(timezone.now() - timedelta(days=30)))
+
+tasks.filter(Q(status__title="В процессе") | Q(status__title="Новая")).filter(Q(tasks__title="Улучшение") | Q(tasks__title="Задача")).distinct()
+
+tasks.filter(~Q(status__title="Выполнено")).filter(Q(tasks__title="Задача")).distinct()
+
+tasks.values_list('id', 'summary', 'tasks__title', 'status__title')
+
+tasks.filter(summary= F('description'))
+
+tasks.values_list('tasks__title').annotate(Count('tasks__title'))
