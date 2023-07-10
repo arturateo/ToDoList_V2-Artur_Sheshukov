@@ -41,4 +41,4 @@ class ToDoListModels(models.Model):
         verbose_name_plural = 'Список задач'
 
     def __str__(self):
-        return f'{self.summary} '
+        return f'{self.summary}'
