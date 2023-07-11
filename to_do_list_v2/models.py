@@ -25,6 +25,21 @@ class StatusModel(models.Model):
         return self.title
 
 
+class ProjectModels(models.Model):
+    summary = models.CharField(max_length=60, null=False, blank=False, verbose_name='Заголовок')
+    description = models.TextField(max_length=300, null=False, blank=False, verbose_name='Название')
+    start_date = models.DateField(null=True, blank=False, verbose_name='Дата начала')
+    end_date = models.DateField(blank=True, null=True, verbose_name='Дата окончания')
+
+    class Meta:
+        db_table = 'Project'
+        verbose_name = 'Список проектов'
+        verbose_name_plural = 'Список проектов'
+
+    def __str__(self):
+        return f'{self.summary}'
+
+
 class ToDoListModels(models.Model):
     summary = models.CharField(max_length=60, null=False, blank=False, verbose_name='Заголовок')
     description = models.TextField(max_length=300, null=True, blank=True, verbose_name='Название')
@@ -32,6 +47,9 @@ class ToDoListModels(models.Model):
                                on_delete=models.PROTECT)
     tasks = models.ManyToManyField('to_do_list_v2.TasksModel', related_name='tasks', verbose_name='Типы задач',
                                    blank=False)
+
+    project = models.ForeignKey('to_do_list_v2.ProjectModels', related_name='projects', verbose_name='Проекты',
+                                on_delete=models.PROTECT)
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     update_date = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
 

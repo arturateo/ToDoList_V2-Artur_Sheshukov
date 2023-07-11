@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from to_do_list_v2.models import TasksModel, StatusModel, ToDoListModels
+from to_do_list_v2.models import TasksModel, StatusModel, ToDoListModels, ProjectModels
 
 
 class TasksAdminModels(admin.ModelAdmin):
@@ -21,6 +21,16 @@ class StatusAdminModels(admin.ModelAdmin):
 
 
 admin.site.register(StatusModel, StatusAdminModels)
+
+
+class ProjectAdminModels(admin.ModelAdmin):
+    list_display = ['id', 'summary', 'description', 'start_date', 'end_date']
+    list_display_links = ['id', 'summary', 'description']
+    search_fields = ['summary', 'description']
+    fields = ['summary', 'description', 'start_date', 'end_date']
+
+
+admin.site.register(ProjectModels, ProjectAdminModels)
 
 
 class ToDoListAdminModels(admin.ModelAdmin):
