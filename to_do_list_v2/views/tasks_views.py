@@ -6,8 +6,8 @@ from to_do_list_v2.forms.task_form import TaskForm
 from to_do_list_v2.models import ToDoListModels
 
 
-class IndexView(TemplateView):
-    template_name = 'home.html'
+class TasksList(TemplateView):
+    template_name = 'tasks/tasks_list.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -16,7 +16,7 @@ class IndexView(TemplateView):
 
 
 class TaskDetailView(TemplateView):
-    template_name = 'detail_task.html'
+    template_name = 'tasks/detail_task.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -27,7 +27,7 @@ class TaskDetailView(TemplateView):
 class TaskAddView(FormView):
     success_url = reverse_lazy('home')
     form_class = TaskForm
-    template_name = "add_task.html"
+    template_name = "tasks/add_task.html"
 
     def form_valid(self, form):
         task = form.save()
@@ -37,7 +37,7 @@ class TaskAddView(FormView):
 class TaskEditView(FormView):
     success_url = reverse_lazy('home')
     form_class = TaskForm
-    template_name = "add_task.html"
+    template_name = "tasks/add_task.html"
 
     def dispatch(self, request, *args, **kwargs):
         self.task = self.get_object(kwargs.get('pk'))
@@ -59,7 +59,7 @@ class TaskEditView(FormView):
 class TaskDeleteView(View):
     def get(self, request, pk):
         task = get_object_or_404(ToDoListModels, pk=pk)
-        return render(request, 'delete_task.html', {'task': task})
+        return render(request, 'tasks/delete_task.html', {'task': task})
 
     def post(self, request, pk):
         task = get_object_or_404(ToDoListModels, pk=pk)
