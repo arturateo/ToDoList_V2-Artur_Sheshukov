@@ -6,7 +6,7 @@
             <h5 class="card-title">{{ data.summary }}</h5>
             <p class="card-text">{{ data.description }}</p>
             <p class="card-text"><strong>
-                    {% for task in data.tasks.all %}
+                    {% for task in tasks %}
                         {{ task.title }}{% if not forloop.last %},
                         {% endif %}
                     {% endfor %}:</strong> {{ data.status }}</p>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Детальный просмотр{% endblock %}
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ data.summary }}</h5>
+            <p class="card-text">{{ data.description }}</p>
+            <p class="card-text">Дата старта проекта: {{ data.start_date|date:'Y-m-d' }}</p>
+            <p class="card-text">Дата окончания старта: {{ data.end_date|date:'Y-m-d' }}</p>
+
+            <a href="{% url 'project_edit' data.id %}" class="btn btn-primary">Изменить</a>
+            <a href="{% url 'delete_project' data.id %}" class="btn btn-danger">Удалить</a>
+        </div>
+    </div>
+    <div class="row">
+        {% for list in tasks %}
+            <div class="col-sm-2 mb-3 d-flex">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ list.summary }}</h5>
+                        <p class="card-text">{{ list.description }}</p>
+                        <div class="card_link">
+                            <a href="{% url 'project_detail' list.id %}" class="btn btn-primary stretched-link">Детальный
+                                просмотр</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <span>Создайте задачу</span>
+        {% endfor %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+
+    </div>
+{% endblock %}
