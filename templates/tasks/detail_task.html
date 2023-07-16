@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Детальный просмотр{% endblock %}
-{% block content %}
+d{% block content %}
     <div class="card mb-3">
         <div class="card-body">
             <h5 class="card-title">{{ data.summary }}</h5>
             <p class="card-text">{{ data.description }}</p>
             <p class="card-text"><strong>
-                    {% for task in tasks %}
+                    {% for task in data.tasks.all %}
                         {{ task.title }}{% if not forloop.last %},
                         {% endif %}
                     {% endfor %}:</strong> {{ data.status }}</p>

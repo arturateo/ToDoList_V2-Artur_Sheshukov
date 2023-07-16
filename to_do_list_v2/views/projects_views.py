@@ -13,7 +13,7 @@ class ProjectList(ListView):
     context_object_name = 'projects'
     paginate_by = 5
     paginate_orphans = 1
-    ordering = ("start_date",)
+    ordering = ("summary",)
     page_kwarg = 'page'
 
     def dispatch(self, request, *args, **kwargs):
@@ -53,7 +53,7 @@ class ProjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         tasks = ToDoListModels.objects.all()
-        context['tasks'] = tasks.filter(project_id=self.object)
+        context['tasks'] = tasks.filter(project_id=self.object.pk).distinct()
         return context
 
 

@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Детальный просмотр{% endblock %}
+{% block link %}
+    <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'add_task' data.pk %}">Добавить задачу</a>
+        </li>
+    </ul>
+{% endblock %}
 {% block content %}
     <div class="card mb-3">
         <div class="card-body">
@@ -20,7 +27,8 @@
                         <h5 class="card-title">{{ list.summary }}</h5>
                         <p class="card-text">{{ list.description }}</p>
                         <div class="card_link">
-                            <a href="{% url 'project_detail' list.id %}" class="btn btn-primary stretched-link">Детальный
+                            <a href="{% url 'task_detail' list.id %}"
+                               class="btn btn-primary stretched-link">Детальный
                                 просмотр</a>
                         </div>
                     </div>
