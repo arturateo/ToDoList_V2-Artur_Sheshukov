@@ -48,7 +48,6 @@ class ToDoListModels(models.Model):
                                on_delete=models.PROTECT)
     tasks = models.ManyToManyField('to_do_list_v2.TasksModel', related_name='tasks', verbose_name='Типы задач',
                                    blank=False)
-
     project = models.ForeignKey('to_do_list_v2.ProjectModels', related_name='projects', verbose_name='Проекты',
                                 on_delete=models.PROTECT)
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
