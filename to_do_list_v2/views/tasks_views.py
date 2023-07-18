@@ -21,7 +21,7 @@ class TaskAddView(CreateView):
         comment.project = project
         comment.save()
         form.save_m2m()
-        return redirect("project_detail", pk=project.pk)
+        return redirect("to_do_list:project_detail", pk=project.pk)
 
 
 class TaskEditView(UpdateView):
@@ -31,11 +31,11 @@ class TaskEditView(UpdateView):
 
     def get_success_url(self):
         print(self.object)
-        return reverse("task_detail", kwargs={"pk": self.object.pk})
+        return reverse("to_do_list:task_detail", kwargs={"pk": self.object.pk})
 
 
 class TaskDeleteView(DeleteView):
     model = ToDoListModels
     template_name = "tasks/delete_task.html"
     context_object_name = 'tasks'
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("to_do_list:home")

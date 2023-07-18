@@ -13,8 +13,8 @@
             <p class="card-text">Дата добавления: {{ data.create_date|date:'Y-m-d H:i' }}</p>
             <p class="card-text">Дата обновления: {{ data.update_date|date:'Y-m-d H:i' }}</p>
 
-            <a href="{% url 'task_edit' data.id %}" class="btn btn-primary">Изменить</a>
-            <a href="{% url 'delete_task' data.id %}" class="btn btn-danger">Удалить</a>
+            <a href="{% url 'to_do_list:task_edit' data.id %}" class="btn btn-primary">Изменить</a>
+            <a href="{% url 'to_do_list:delete_task' data.id %}" class="btn btn-danger">Удалить</a>
         </div>
     </div>
 {% endblock %}

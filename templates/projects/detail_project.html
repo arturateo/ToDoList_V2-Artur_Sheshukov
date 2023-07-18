@@ -3,7 +3,7 @@
 {% block link %}
     <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'add_task' data.pk %}">Добавить задачу</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'to_do_list:add_task' data.pk %}">Добавить задачу</a>
         </li>
     </ul>
 {% endblock %}
@@ -15,8 +15,8 @@
             <p class="card-text">Дата старта проекта: {{ data.start_date|date:'Y-m-d' }}</p>
             <p class="card-text">Дата окончания старта: {{ data.end_date|date:'Y-m-d' }}</p>
 
-            <a href="{% url 'project_edit' data.id %}" class="btn btn-primary">Изменить</a>
-            <a href="{% url 'delete_project' data.id %}" class="btn btn-danger">Удалить</a>
+            <a href="{% url 'to_do_list:project_edit' data.id %}" class="btn btn-primary">Изменить</a>
+            <a href="{% url 'to_do_list:delete_project' data.id %}" class="btn btn-danger">Удалить</a>
         </div>
     </div>
     <div class="row">
@@ -27,7 +27,7 @@
                         <h5 class="card-title">{{ list.summary }}</h5>
                         <p class="card-text">{{ list.description }}</p>
                         <div class="card_link">
-                            <a href="{% url 'task_detail' list.id %}"
+                            <a href="{% url 'to_do_list:task_detail' list.id %}"
                                class="btn btn-primary stretched-link">Детальный
                                 просмотр</a>
                         </div>

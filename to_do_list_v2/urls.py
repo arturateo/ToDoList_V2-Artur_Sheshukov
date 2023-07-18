@@ -4,6 +4,8 @@ from to_do_list_v2.views.projects_views import ProjectList, ProjectAddView, Proj
     ProjectDeleteView
 from to_do_list_v2.views.tasks_views import TaskDetailView, TaskAddView, TaskEditView, TaskDeleteView
 
+app_name = 'to_do_list'
+
 urlpatterns = [
     path('', ProjectList.as_view(), name="home"),
     path('add_project/', ProjectAddView.as_view(), name="add_project"),
