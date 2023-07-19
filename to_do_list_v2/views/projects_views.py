@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.shortcuts import redirect
 from django.utils.http import urlencode
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
@@ -80,6 +81,11 @@ class ProjectAddView(CreateView):
     template_name = 'projects/add_project.html'
     form_class = ProjectForm
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("to_do_list:page_not_found")
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse("to_do_list:project_detail", kwargs={"pk": self.object.pk})
 
@@ -88,6 +94,11 @@ class ProjectEditView(UpdateView):
     model = ProjectModels
     form_class = ProjectForm
     template_name = "projects/edit_project.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("to_do_list:page_not_found")
+        return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse("to_do_list:project_detail", kwargs={"pk": self.object.pk})
@@ -98,3 +109,8 @@ class ProjectDeleteView(DeleteView):
     template_name = "projects/delete_project.html"
     context_object_name = 'project'
     success_url = reverse_lazy("to_do_list:home")
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("to_do_list:page_not_found")
+        return super().dispatch(request, *args, **kwargs)

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Изменение задачи{% endblock %}
+{% block content %}
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">{{ error }}</h5>
+            <a href="{% url 'to_do_list:home' %}" class="btn btn-primary">На главную</a>
+        </div>
+    </div>
+{% endblock %}

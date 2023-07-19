@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Детальный просмотр{% endblock %}
 {% block link %}
-    <ul class="navbar-nav mb-2 mb-lg-0">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'to_do_list:add_task' data.pk %}">Добавить задачу</a>
-        </li>
-    </ul>
+    {% if user.is_authenticated %}
+        <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'to_do_list:add_task' %}">Добавить
+                    задачу</a>
+            </li>
+        </ul>
+    {% endif %}
 {% endblock %}
 {% block content %}
     <div class="card mb-3">
@@ -14,9 +17,10 @@
             <p class="card-text">{{ data.description }}</p>
             <p class="card-text">Дата старта проекта: {{ data.start_date|date:'Y-m-d' }}</p>
             <p class="card-text">Дата окончания старта: {{ data.end_date|date:'Y-m-d' }}</p>
-
-            <a href="{% url 'to_do_list:project_edit' data.id %}" class="btn btn-primary">Изменить</a>
-            <a href="{% url 'to_do_list:delete_project' data.id %}" class="btn btn-danger">Удалить</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'to_do_list:project_edit' data.id %}" class="btn btn-primary">Изменить</a>
+                <a href="{% url 'to_do_list:delete_project' data.id %}" class="btn btn-danger">Удалить</a>
+            {% endif %}
         </div>
     </div>
     <div class="row">

@@ -6,15 +6,16 @@
             <h5 class="card-title">{{ data.summary }}</h5>
             <p class="card-text">{{ data.description }}</p>
             <p class="card-text"><strong>
-                    {% for task in data.tasks.all %}
-                        {{ task.title }}{% if not forloop.last %},
-                        {% endif %}
-                    {% endfor %}:</strong> {{ data.status }}</p>
+                {% for task in data.tasks.all %}
+                    {{ task.title }}{% if not forloop.last %},
+                    {% endif %}
+                {% endfor %}:</strong> {{ data.status }}</p>
             <p class="card-text">Дата добавления: {{ data.create_date|date:'Y-m-d H:i' }}</p>
             <p class="card-text">Дата обновления: {{ data.update_date|date:'Y-m-d H:i' }}</p>
-
-            <a href="{% url 'to_do_list:task_edit' data.id %}" class="btn btn-primary">Изменить</a>
-            <a href="{% url 'to_do_list:delete_task' data.id %}" class="btn btn-danger">Удалить</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'to_do_list:task_edit' data.id %}" class="btn btn-primary">Изменить</a>
+                <a href="{% url 'to_do_list:delete_task' data.id %}" class="btn btn-danger">Удалить</a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
