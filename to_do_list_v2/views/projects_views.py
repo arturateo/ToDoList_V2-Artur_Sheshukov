@@ -13,7 +13,7 @@ class ProjectList(ListView):
     context_object_name = 'projects'
     paginate_by = 5
     paginate_orphans = 1
-    ordering = ("summary",)
+    ordering = ("summary", )
     page_kwarg = 'page'
 
     def dispatch(self, request, *args, **kwargs):
@@ -65,7 +65,7 @@ class ProjectDetailView(DetailView):
             context['tasks'] = tasks.filter(project_id=self.object.pk).filter(Q(summary__icontains=self.search_value) |
                                                                               Q(description__icontains=self.search_value)).distinct()
         else:
-            context['tasks'] = tasks.filter(project_id=self.object.pk).filter().distinct()
+            context['tasks'] = tasks.filter(project_id=self.object.pk).distinct()
         return context
 
     def get_search_form(self):
