@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.utils.http import urlencode
@@ -77,9 +78,10 @@ class ProjectDetailView(DetailView):
         return None
 
 
-class ProjectAddView(CreateView):
+class ProjectAddView(PermissionRequiredMixin, CreateView):
     template_name = 'projects/add_project.html'
     form_class = ProjectForm
+    permission_required = 'to_do_list_v2.add_projectmodels'
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -96,11 +98,15 @@ class ProjectAddView(CreateView):
     def get_success_url(self):
         return reverse("to_do_list:project_detail", kwargs={"pk": self.object.pk})
 
+    def has_permission(self):
+        return super().has_permission()
 
-class ProjectEditView(UpdateView):
+
+class ProjectEditView(PermissionRequiredMixin, UpdateView):
     model = ProjectModels
     form_class = ProjectForm
     template_name = "projects/edit_project.html"
+    permission_required = 'to_do_list_v2.change_projectmodels'
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -110,23 +116,31 @@ class ProjectEditView(UpdateView):
     def get_success_url(self):
         return reverse("to_do_list:project_detail", kwargs={"pk": self.object.pk})
 
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().author.all()
 
-class ProjectDeleteView(DeleteView):
+
+class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
     model = ProjectModels
     template_name = "projects/delete_project.html"
     context_object_name = 'project'
     success_url = reverse_lazy("to_do_list:home")
+    permission_required = 'to_do_list_v2.delete_projectmodels'
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect("to_do_list:page_not_found")
         return super().dispatch(request, *args, **kwargs)
 
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().author.all()
 
-class ProjectAddAuthor(UpdateView):
+
+class ProjectAddAuthor(PermissionRequiredMixin, UpdateView):
     model = ProjectModels
     template_name = 'projects/add_project_author.html'
     form_class = ProjectAddAuthorForm
+    permission_required = 'to_do_list_v2.change_author_projectmodels'
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -135,3 +149,6 @@ class ProjectAddAuthor(UpdateView):
 
     def get_success_url(self):
         return reverse("to_do_list:project_detail", kwargs={"pk": self.object.pk})
+
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().author.all()

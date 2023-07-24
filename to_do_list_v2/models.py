@@ -38,6 +38,9 @@ class ProjectModels(models.Model):
         db_table = 'Project'
         verbose_name = 'Список проектов'
         verbose_name_plural = 'Список проектов'
+        permissions = [
+            ('change_author_projectmodels', 'Изменить авторов проекта')
+        ]
 
     def __str__(self):
         return f'{self.summary}'

@@ -2,12 +2,14 @@
 {% block title %}Детальный просмотр{% endblock %}
 {% block link %}
     {% if user.is_authenticated %}
-        <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'to_do_list:add_task' data.id %}">Добавить
-                    задачу</a>
-            </li>
-        </ul>
+        {% if perms.to_do_list_v2.add_todolistmodels and request.user in data.author.all%}
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'to_do_list:add_task' data.id %}">Добавить
+                        задачу</a>
+                </li>
+            </ul>
+        {% endif %}
     {% endif %}
 {% endblock %}
 {% block content %}
@@ -25,9 +27,16 @@
             <p class="card-text">Дата старта проекта: {{ data.start_date|date:'Y-m-d' }}</p>
             <p class="card-text">Дата окончания старта: {{ data.end_date|date:'Y-m-d' }}</p>
             {% if user.is_authenticated %}
-                <a href="{% url 'to_do_list:project_edit' data.id %}" class="btn btn-primary">Изменить</a>
-                <a href="{% url 'to_do_list:project_add_author' data.id %}" class="btn btn-primary">Добавить соавторов</a>
-                <a href="{% url 'to_do_list:delete_project' data.id %}" class="btn btn-danger">Удалить</a>
+                {% if perms.to_do_list_v2.change_projectmodels and request.user in data.author.all %}
+                    <a href="{% url 'to_do_list:project_edit' data.id %}" class="btn btn-primary">Изменить</a>
+                {% endif %}
+                {% if perms.to_do_list_v2.change_author_projectmodels and request.user in data.author.all %}
+                    <a href="{% url 'to_do_list:project_add_author' data.id %}" class="btn btn-primary">Добавить
+                        соавторов</a>
+                {% endif %}
+                {% if perms.to_do_list_v2.delete_projectmodels and request.user in data.author.all %}
+                    <a href="{% url 'to_do_list:delete_project' data.id %}" class="btn btn-danger">Удалить</a>
+                {% endif %}
             {% endif %}
         </div>
     </div>
