@@ -48,7 +48,10 @@
         "summary": "Проект №1",
         "description": "Описание проекта №1",
         "start_date": "2023-07-11",
-        "end_date": "2023-07-20"
+        "end_date": "2023-07-20",
+        "author": [
+            2
+        ]
     }
 },
 {
@@ -58,7 +61,10 @@
         "summary": "Проект №2",
         "description": "Описание проекта №2",
         "start_date": "2023-07-11",
-        "end_date": null
+        "end_date": null,
+        "author": [
+            3
+        ]
     }
 },
 {
@@ -68,7 +74,10 @@
         "summary": "Проект №3",
         "description": "Описание проекта№3",
         "start_date": "2023-07-20",
-        "end_date": "2023-07-28"
+        "end_date": "2023-07-28",
+        "author": [
+            4
+        ]
     }
 },
 {
@@ -78,7 +87,10 @@
         "summary": "Проект №5",
         "description": "Описание проекта№5",
         "start_date": "2023-09-10",
-        "end_date": "2023-10-11"
+        "end_date": "2023-10-11",
+        "author": [
+            2
+        ]
     }
 },
 {
@@ -88,7 +100,10 @@
         "summary": "Проект №4",
         "description": "Описание проекта№4",
         "start_date": "2023-06-30",
-        "end_date": null
+        "end_date": null,
+        "author": [
+            3
+        ]
     }
 },
 {
@@ -98,7 +113,10 @@
         "summary": "Проект №6",
         "description": "Описание проекта№6",
         "start_date": "2023-05-02",
-        "end_date": null
+        "end_date": null,
+        "author": [
+            4
+        ]
     }
 },
 {
@@ -108,7 +126,34 @@
         "summary": "Проект №8",
         "description": "Описание проекта№7",
         "start_date": "2023-02-19",
-        "end_date": "2023-09-09"
+        "end_date": "2023-09-09",
+        "author": [
+            2
+        ]
+    }
+},
+{
+    "model": "to_do_list_v2.projectmodels",
+    "pk": 17,
+    "fields": {
+        "summary": "Тест Проект Участника",
+        "description": "Тест Проект УчастникаТест Проект УчастникаТест Проект Участника",
+        "start_date": "2023-01-01",
+        "end_date": null,
+        "author": []
+    }
+},
+{
+    "model": "to_do_list_v2.projectmodels",
+    "pk": 18,
+    "fields": {
+        "summary": "ТЕСТЕТСЕТ",
+        "description": "ТЕСТЕТСЕТТЕСТЕТСЕТТЕСТЕТСЕТТЕСТЕТСЕТ",
+        "start_date": "2023-01-01",
+        "end_date": null,
+        "author": [
+            2
+        ]
     }
 },
 {
@@ -138,8 +183,8 @@
         "create_date": "2023-07-05T19:32:33.071Z",
         "update_date": "2023-07-06T19:15:28.862Z",
         "tasks": [
-            2,
-            1
+            1,
+            2
         ]
     }
 },
@@ -154,9 +199,9 @@
         "create_date": "2023-07-05T19:32:52.001Z",
         "update_date": "2023-07-06T19:24:23.356Z",
         "tasks": [
-            3,
             1,
-            2
+            2,
+            3
         ]
     }
 },
@@ -538,21 +583,48 @@
     }
 },
 {
-    "model": "auth.user",
-    "pk": 1,
+    "model": "to_do_list_v2.todolistmodels",
+    "pk": 38,
     "fields": {
-        "password": "pbkdf2_sha256$600000$lzKyy6zlDGv5GlehMLzIrI$8WZztB4H8MEDxCA+TiB5lKGef9di2N2J4SldJLvwla8=",
-        "last_login": "2023-07-05T19:30:37.085Z",
-        "is_superuser": true,
-        "username": "admin",
-        "first_name": "",
-        "last_name": "",
-        "email": "",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2023-07-05T19:30:33.692Z",
-        "groups": [],
-        "user_permissions": []
+        "summary": "asdsadadasdasdaassdasdadasda",
+        "description": "assdasdadasdaassdasdadasdaassdasdadasdaassdasdadasdaassdasdadasda",
+        "status": 2,
+        "project": 2,
+        "create_date": "2023-07-24T16:52:42.005Z",
+        "update_date": "2023-07-24T16:52:42.005Z",
+        "tasks": [
+            2
+        ]
+    }
+},
+{
+    "model": "to_do_list_v2.todolistmodels",
+    "pk": 39,
+    "fields": {
+        "summary": "123123123123123123",
+        "description": "123123123123123123123123123123123123123123123123",
+        "status": 2,
+        "project": 11,
+        "create_date": "2023-07-24T19:59:02.916Z",
+        "update_date": "2023-07-24T19:59:02.916Z",
+        "tasks": [
+            2
+        ]
+    }
+},
+{
+    "model": "to_do_list_v2.todolistmodels",
+    "pk": 40,
+    "fields": {
+        "summary": "123123123123123123",
+        "description": "123123123123123123123123123123123123123123",
+        "status": 1,
+        "project": 3,
+        "create_date": "2023-07-24T20:00:39.512Z",
+        "update_date": "2023-07-24T20:00:39.512Z",
+        "tasks": [
+            2
+        ]
     }
 }
 ]
