@@ -18,19 +18,21 @@
         {% if user.is_authenticated %}
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'accounts:logout' %}">Выход</a>
+                    <a class="nav-link active" aria-current="page"
+                       href="{% url 'accounts:logout' %}?next={{ request.path }}">Выход</a>
                 </li>
             </ul>
         {% else %}
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page"
-                       href="{% url 'to_do_list:add_project' %}">Регистрация</a>
+                       href="{% url 'accounts:register' %}?next={{ request.path }}">Регистрация</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'accounts:login' %}">Вход</a>
+                    <a class="nav-link active" aria-current="page"
+                       href="{% url 'accounts:login' %}?next={{ request.path }}">Вход</a>
                 </li>
             </ul>
         {% endif %}
