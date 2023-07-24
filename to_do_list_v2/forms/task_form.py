@@ -43,3 +43,10 @@ class ProjectForm(forms.ModelForm):
                    'description': widgets.Textarea(attrs={'class': 'form-control'}),
                    'start_date': widgets.DateInput(format='%Y-%m-%d', attrs={'class': 'form-control', 'type': 'date'}),
                    'end_date': widgets.DateInput(format='%Y-%m-%d', attrs={'class': 'form-control', 'type': 'date'})}
+
+
+class ProjectAddAuthorForm(forms.ModelForm):
+    class Meta:
+        model = ProjectModels
+        fields = ['author']
+        widgets = {'author': widgets.SelectMultiple(attrs={'class': 'form-control'})}

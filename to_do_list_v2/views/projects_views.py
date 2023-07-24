@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.utils.http import urlencode
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
-from to_do_list_v2.forms.task_form import SearchForm, ProjectForm
+from to_do_list_v2.forms.task_form import SearchForm, ProjectForm, ProjectAddAuthorForm
 from to_do_list_v2.models import ProjectModels, ToDoListModels
 
 
@@ -13,7 +13,7 @@ class ProjectList(ListView):
     context_object_name = 'projects'
     paginate_by = 5
     paginate_orphans = 1
-    ordering = ("summary", )
+    ordering = ("summary",)
     page_kwarg = 'page'
 
     def dispatch(self, request, *args, **kwargs):
@@ -86,6 +86,13 @@ class ProjectAddView(CreateView):
             return redirect("to_do_list:page_not_found")
         return super().dispatch(request, *args, **kwargs)
 
+    def form_valid(self, form):
+        project = form.save(commit=False)
+        project.save()
+        project.author.set([self.request.user.id], )
+        form.save_m2m()
+        return redirect("to_do_list:project_detail", pk=project.pk)
+
     def get_success_url(self):
         return reverse("to_do_list:project_detail", kwargs={"pk": self.object.pk})
 
@@ -114,3 +121,17 @@ class ProjectDeleteView(DeleteView):
         if not request.user.is_authenticated:
             return redirect("to_do_list:page_not_found")
         return super().dispatch(request, *args, **kwargs)
+
+
+class ProjectAddAuthor(UpdateView):
+    model = ProjectModels
+    template_name = 'projects/add_project_author.html'
+    form_class = ProjectAddAuthorForm
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("to_do_list:page_not_found")
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse("to_do_list:project_detail", kwargs={"pk": self.object.pk})

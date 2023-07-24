@@ -27,7 +27,7 @@ class ProjectAdminModels(admin.ModelAdmin):
     list_display = ['id', 'summary', 'description', 'start_date', 'end_date']
     list_display_links = ['id', 'summary', 'description']
     search_fields = ['summary', 'description']
-    fields = ['summary', 'description', 'start_date', 'end_date']
+    fields = ['summary', 'description', 'author', 'start_date', 'end_date']
 
 
 admin.site.register(ProjectModels, ProjectAdminModels)
