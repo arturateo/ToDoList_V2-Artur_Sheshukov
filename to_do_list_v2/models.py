@@ -1,5 +1,5 @@
+from django.contrib.auth import get_user_model
 from django.db import models
-from django import forms
 
 
 class TasksModel(models.Model):
@@ -29,6 +29,8 @@ class StatusModel(models.Model):
 class ProjectModels(models.Model):
     summary = models.CharField(max_length=60, null=False, blank=False, verbose_name='Заголовок')
     description = models.TextField(max_length=300, null=False, blank=False, verbose_name='Название')
+    author = models.ManyToManyField(get_user_model(), related_name='projects',
+                                    verbose_name='Автор ', blank=False)
     start_date = models.DateField(null=True, blank=False, verbose_name='Дата начала')
     end_date = models.DateField(blank=True, null=True, verbose_name='Дата окончания')
 
@@ -60,6 +62,3 @@ class ToDoListModels(models.Model):
 
     def __str__(self):
         return f'{self.summary}'
-
-
-
